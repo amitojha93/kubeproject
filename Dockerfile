@@ -1,12 +1,13 @@
-FROM dokken/amazonlinux-2
+FROM centos:latest
 MAINTAINER amitojha93
-WORKDIR /opt
-Add 'https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.88/bin/apache-tomcat-8.5.88.zip' /opt/
-RUN yum install unzip -y
-RUN yum install telnet -y
-RUN yum install vim -y
-RUN unzip apache-tomcat-8.5.88.zip
-RUN chmod +x apache-tomcat-8.5.88/bin/*
-RUN amazon-linux-extras install java-openjdk11 -y
-COPY ./sample.war /opt/apache-tomcat-8.5.88/webapps/
-CMD [ "/opt/apache-tomcat-8.5.88/bin/catalina.sh", "run" ]
+RUN yum install -y httpd \
+zip \
+unzip
+Add https://www/free-css.com/assets/files/free-css-templates/download/page258/loxury.zip /var/www/html
+WORKDIR /var/www/html
+RUN unzip loxury.zip
+RUN CP -rvf loxury/* .
+RUN rm -rf loxury loxury.zip
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+EXPOSE 80
+
